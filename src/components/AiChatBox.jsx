@@ -78,6 +78,7 @@ export default function AIChatBox({ open, onClose }) {
                                     content: "Selamat datang di Asisten Virtual Kampus! Saya siap membantu Anda dengan informasi tentang pendaftaran jurusan, dan biaya kuliah. Silahkan ajukan pertanyaan atau pilih kategori yang anda butuhkan."
                                 }}
                             />
+
                             <div className="grid gap-1 sm:grid-cols-2 mx-6">
                                 <Button
                                     title="Pendaftaran"

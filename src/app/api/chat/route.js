@@ -20,7 +20,6 @@ export async function POST(req) {
     const vectorQueryResponse = await notesIndex.query({
       vector: embedding,
       topK: 4,
-      filter: { userId },
     });
 
     const relevantNotes = await prisma.note.findMany({
@@ -36,13 +35,16 @@ export async function POST(req) {
     const systemMessage = {
       role: "system",
       content:
-        "You are an intelligent note-taking app. You answer the user's question based on their existing notes. If in their notes there is a link that related to a note than put the link in the answers too." +
+        "You are an intelligent note-taking app. You answer the user's question based on their existing notes." +
         "The relevant notes for this query are:\n" +
         relevantNotes
           .map((note) => `Title: ${note.title}\n\nContent:\n${note.content}`)
           .join("\n\n") +
+        "If you can find the notes related with the question. look for the link inside of the notes, if you found the link inside the note, then you must put the link after the answer, and the link must be clickable. " +
         "If you cannot find the relevant notes for the query, then answer with: 'Maaf, sepertinya saya tidak memiliki jawaban yang tepat untuk pertanyaan Anda saat ini. Apakah anda masih ingin bertanya hal lain?'" +
-        "If you still cannot find the relevant notes for the query, at least in 2 times then answer with: 'Mohon maaf atas keterbatasan informasi yang dapat kami berikan. Untuk bantuan lebih lanjut, mohon hubungi admin kami melalui WhatsApp untuk informasi yang lebih detail.'",
+        "There is three emergency contact: first, named Jakarta and the number is 08123456789. Second, named Bekasi and the number is 0987654321. Third, named Tangerang and the number is 13578024579." +
+        "If you cannot answer the question for at least two times. only aswer with this text: 'Mohon maaf atas keterbatasan informasi yang dapat kami berikan. Untuk bantuan lebih lanjut, mohon hubungi admin kami melalui WhatsApp untuk informasi yang lebih detail.' and make sure to add the emergency contact after the text, The format for the emergency contact is: name - number and a linebreak after each emergency contact " +
+        "If you still cannot find the relevant notes for the query, at least in 2 times then answer with this text: ",
     };
 
     const response = await openai.chat.completions.create({

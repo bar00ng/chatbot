@@ -77,10 +77,6 @@ export async function PUT(req) {
 
     const { userId } = auth();
 
-    if (!userId || userId !== note.userId) {
-      return Response.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
     const embedding = await getEmbeddingForNote(title, content);
 
     const updatedNote = await prisma.$transaction(async (tx) => {
@@ -127,12 +123,6 @@ export async function DELETE(req) {
 
     if (!note) {
       return Response.json({ error: "Note not found" }, { status: 404 });
-    }
-
-    const { userId } = auth();
-
-    if (!userId || userId !== note.userId) {
-      return Response.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     await prisma.$transaction(async (tx) => {
