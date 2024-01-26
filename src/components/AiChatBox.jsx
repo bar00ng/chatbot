@@ -8,6 +8,7 @@ import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
+import { Avatar, AvatarFallback } from "./ui/avatar"
 
 export default function AIChatBox({ open, onClose }) {
     const [info, setInfo] = useState(false);
@@ -50,6 +51,22 @@ export default function AIChatBox({ open, onClose }) {
                 <XCircle size={30} />
             </button>
             <div className="flex h-[500px] flex-col rounded border bg-background shadow-xl">
+                {/* Chatbox Header Container */}
+                <div class="flex gap-3 flex-wrap py-3 px-4 bg-blue-600 rounded-t-md">
+                    {/* Avatar Container */}
+                    <div class="flex items-center [&>*]:w-[2.7rem] [&>*]:h-[2.7rem] [&>*]:rounded-full [&>*]:bg-transparent [&>*]:p-0.5 [&>*]:-ml-2 [&>*:hover]:z-20 [&>*:hover]:scale-105 [&>*>img]:h-full [&>*>img]:w-full [&>*>img]:rounded-full [&>*>img]:object-cover transition-all duration-300">
+                        <div>
+                            <Avatar>
+                                <AvatarFallback>EUC</AvatarFallback>
+                            </Avatar>
+                        </div>
+                    </div>
+                    {/* Display Name*/}
+                    <div class="text-white">
+                        <h2 class="mb-1 font-semibold">Esa Unggul Chatbot</h2>
+                        <p class="text-xs italic font-light">Chatbot Assistant</p>
+                    </div>
+                </div>
                 <div className="mt-3 h-full overflow-y-auto px-3" ref={scrollRef}>
                     {messages.map(message => (
                         <ChatMessage message={message} key={message.id} />
@@ -58,7 +75,7 @@ export default function AIChatBox({ open, onClose }) {
                         <ChatMessage
                             message={{
                                 role: "assistant",
-                                content: "Sendang mencari jawaban..."
+                                content: "..."
                             }}
                         />
                     )}
@@ -165,8 +182,6 @@ export default function AIChatBox({ open, onClose }) {
 }
 
 function ChatMessage({ message: { role, content } }) {
-    const { user } = useUser()
-
     const isAiMessage = role === "assistant"
 
     return (
@@ -185,9 +200,9 @@ function ChatMessage({ message: { role, content } }) {
             >
                 {content}
             </p>
-            {!isAiMessage && user?.imageUrl && (
+            {!isAiMessage && (
                 <Image
-                    src={user.imageUrl}
+                    src="https://placehold.co/100"
                     alt="User image"
                     width={100}
                     height={100}

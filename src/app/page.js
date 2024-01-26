@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { auth } from "@clerk/nextjs";
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -9,16 +10,29 @@ export default function Home() {
   if (userId) redirect("/notes");
 
   return (
-    <main className="flex flex-col items-center h-screen justify-center gap-5">
-      <div className="flex items-center gap-4">
-        <span className="font-extrabold tracking-tight text-4xl lg:text-5xl">
-          Chatbot AI
+    <main className="relative flex h-screen flex-col items-center justify-center gap-5">
+      {/* Gambar dengan ukuran satu halaman */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/LandingPageBg.jpeg"
+          alt="Esa Unggul University"
+          layout="fill"
+          objectFit="cover"
+          className="opacity-50"
+        />
+      </div>
+
+      <div className="relative z-10 flex items-center gap-4">
+        <span className="text-4xl font-extrabold tracking-tight lg:text-5xl">
+          Esa Unggul Chatbot
         </span>
       </div>
 
-      <Button size="lg" asChild>
-        <Link href="/notes">Start</Link>
-      </Button>
+      <div className="relative z-10">
+        <Button size="lg" asChild>
+          <Link href="/notes">Start</Link>
+        </Button>
+      </div>
     </main>
   );
 }

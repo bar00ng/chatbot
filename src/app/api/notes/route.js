@@ -77,6 +77,10 @@ export async function PUT(req) {
 
     const { userId } = auth();
 
+    if (!userId) {
+      return Response.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const embedding = await getEmbeddingForNote(title, content);
 
     const updatedNote = await prisma.$transaction(async (tx) => {
@@ -108,6 +112,12 @@ export async function PUT(req) {
 
 export async function DELETE(req) {
   try {
+    const { userId } = auth();
+
+    if (!userId) {
+      return Response.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await req.json();
 
     const parseResult = deleteNoteSchema.safeParse(body);
