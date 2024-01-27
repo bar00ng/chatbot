@@ -52,7 +52,7 @@ export default function AIChatBox({ open, onClose }) {
             </button>
             <div className="flex h-[500px] flex-col rounded border bg-background shadow-xl">
                 {/* Chatbox Header Container */}
-                <div class="flex gap-3 flex-wrap py-3 px-4 bg-blue-600 rounded-t-md">
+                <div class="flex gap-3 flex-wrap py-3 px-4 bg-blue-600 rounded-t">
                     {/* Avatar Container */}
                     <div class="flex items-center [&>*]:w-[2.7rem] [&>*]:h-[2.7rem] [&>*]:rounded-full [&>*]:bg-transparent [&>*]:p-0.5 [&>*]:-ml-2 [&>*:hover]:z-20 [&>*:hover]:scale-105 [&>*>img]:h-full [&>*>img]:w-full [&>*>img]:rounded-full [&>*>img]:object-cover transition-all duration-300">
                         <div>

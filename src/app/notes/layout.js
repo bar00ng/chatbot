@@ -6,8 +6,8 @@ export default function Layout({ children }) {
     <>
       <NavBar />
 
-      <main className="relative m-auto max-w-7xl p-4">
-        <div className="absolute inset-0 h-screen">
+      <main className="relative m-auto p-4">
+        <div className="absolute inset-0 h-screen w-full">
           <Image
             src="/images/HomeBg.jpeg"
             alt="Esa Unggul University"

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { auth } from "@clerk/nextjs";
+import { SignInButton, auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -29,9 +29,9 @@ export default function Home() {
       </div>
 
       <div className="relative z-10">
-        <Button size="lg" asChild>
-          <Link href="/notes">Start</Link>
-        </Button>
+        <SignInButton>
+          <Button size="lg">Sign In</Button>
+        </SignInButton>
       </div>
     </main>
   );

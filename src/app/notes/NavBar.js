@@ -27,7 +27,7 @@ export default function NavBar() {
     <>
       <div className="p-4 shadow">
         <div className="m-auto flex max-w-7xl flex-wrap items-center justify-between gap-3">
-          <Link href="/notes" className="flex items-center gap-1">
+          <Link href="/" className="flex items-center gap-1">
             <span className="font-bold">Chatbot AI</span>
           </Link>
 
@@ -44,11 +44,6 @@ export default function NavBar() {
               />
             )}
             <ThemeToggleButton />
-            {!userId && (
-              <SignInButton>
-                <Button>Sign In</Button>
-              </SignInButton>
-            )}
             {userId && (
               <Button onClick={() => setShowAddEditNoteDialog(true)}>
                 <Plus size={20} className="mr-2" />
