@@ -18,19 +18,29 @@ export default function Home() {
           alt="Esa Unggul University"
           layout="fill"
           objectFit="cover"
-          className="opacity-50"
         />
       </div>
 
-      <div className="relative z-10 flex items-center gap-4">
-        <span className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Esa Unggul Chatbot
+      <div className="relative z-10 flex flex-col items-center gap-4">
+        <span className="text-4xl font-extrabold tracking-tight text-white lg:text-5xl">
+          Chatbot
+        </span>
+        <span className="text-4xl font-extrabold tracking-tight text-white lg:text-5xl">
+          Universitas Esa Unggul
         </span>
       </div>
 
       <div className="relative z-10">
-        <SignInButton>
-          <Button size="lg">Sign In</Button>
+        <Link href="/dashboard">
+          <Button size="lg">
+            <span className="text-white">Masuk</span>
+          </Button>
+        </Link>
+      </div>
+
+      <div className="relative z-10">
+        <SignInButton className="text-white hover:underline">
+          Lanjutkan sebagai admin
         </SignInButton>
       </div>
     </main>

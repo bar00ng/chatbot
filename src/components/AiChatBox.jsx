@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils"
 import { useUser } from "@clerk/nextjs"
 import { useChat } from "ai/react"
-import { Bot, Trash, XCircle } from "lucide-react"
+import { Bot, SendHorizonal, Trash, UserRound, X, XCircle } from "lucide-react"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { Button } from "./ui/button"
@@ -43,13 +43,10 @@ export default function AIChatBox({ open, onClose }) {
     return (
         <div
             className={cn(
-                "bottom-0 right-0 z-10 w-full max-w-[500px] p-1 xl:right-36",
+                "bottom-0 right-0 z-20 w-full max-w-[500px] p-1 xl:right-36",
                 open ? "fixed" : "hidden"
             )}
         >
-            <button onClick={onClose} className="mb-1 ms-auto block">
-                <XCircle size={30} />
-            </button>
             <div className="flex h-[500px] flex-col rounded border bg-background shadow-xl">
                 {/* Chatbox Header Container */}
                 <div class="flex gap-3 flex-wrap py-3 px-4 bg-blue-600 rounded-t">
@@ -57,7 +54,9 @@ export default function AIChatBox({ open, onClose }) {
                     <div class="flex items-center [&>*]:w-[2.7rem] [&>*]:h-[2.7rem] [&>*]:rounded-full [&>*]:bg-transparent [&>*]:p-0.5 [&>*]:-ml-2 [&>*:hover]:z-20 [&>*:hover]:scale-105 [&>*>img]:h-full [&>*>img]:w-full [&>*>img]:rounded-full [&>*>img]:object-cover transition-all duration-300">
                         <div>
                             <Avatar>
-                                <AvatarFallback>EUC</AvatarFallback>
+                                <AvatarFallback>
+                                    <UserRound />
+                                </AvatarFallback>
                             </Avatar>
                         </div>
                     </div>
@@ -66,6 +65,10 @@ export default function AIChatBox({ open, onClose }) {
                         <h2 class="mb-1 font-semibold">Esa Unggul Chatbot</h2>
                         <p class="text-xs italic font-light">Chatbot Assistant</p>
                     </div>
+
+                    <button onClick={onClose} className="mb-1 ms-auto block text-primary-foreground">
+                        <X size={30} />
+                    </button>
                 </div>
                 <div className="mt-3 h-full overflow-y-auto px-3" ref={scrollRef}>
                     {messages.map(message => (
@@ -100,18 +103,21 @@ export default function AIChatBox({ open, onClose }) {
                                 <Button
                                     title="Pendaftaran"
                                     type="button"
+                                    className="rounded-full"
                                     onClick={() => { setInfo('Pendaftaran') }}
                                 >Pendaftaran</Button>
 
                                 <Button
                                     title="Jurusan"
                                     type="button"
+                                    className="rounded-full"
                                     onClick={() => { setInfo('Jurusan') }}
                                 >Jurusan</Button>
 
                                 <Button
                                     title="Biaya Perkuliahan"
                                     type="button"
+                                    className="rounded-full"
                                     onClick={() => { setInfo('Biaya') }}
                                 >Biaya Perkuliahan</Button>
                             </div>
@@ -159,7 +165,7 @@ export default function AIChatBox({ open, onClose }) {
                         title="Clear chat"
                         variant="outline"
                         size="icon"
-                        className="shrink-0"
+                        className="shrink-0 mr-2"
                         type="button"
                         onClick={() => {
                             setMessages([])
@@ -173,8 +179,11 @@ export default function AIChatBox({ open, onClose }) {
                         onChange={handleInputChange}
                         placeholder="Tanyakan sesuatu..."
                         ref={inputRef}
+                        className="mr-2"
                     />
-                    <Button type="submit">Send</Button>
+                    <Button variant="transparent" size="icon">
+                        <SendHorizonal />
+                    </Button>
                 </form>
             </div>
         </div>
@@ -194,7 +203,7 @@ function ChatMessage({ message: { role, content } }) {
             {isAiMessage && <Bot className="mr-2 shrink-0" />}
             <p
                 className={cn(
-                    "whitespace-pre-line rounded-md border px-3 py-2",
+                    "whitespace-pre-line rounded-lg border px-3 py-2",
                     isAiMessage ? "bg-background" : "bg-primary text-primary-foreground"
                 )}
             >
